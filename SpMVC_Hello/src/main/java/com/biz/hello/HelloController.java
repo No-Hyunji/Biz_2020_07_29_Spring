@@ -1,5 +1,12 @@
 package com.biz.hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.biz.hello.medel.StudentVO;
+import com.biz.hello.service.StudentService;
+
 /*
  * @Controller
  * 프로젝트에서 사용자의 Request를 수신하여 요청을 분석하는 클래스를 만들기
@@ -13,5 +20,22 @@ package com.biz.hello;
  * 그 리스트를 Container에 보관을 하는데, 이 때 Container에 보관되는 객체들을 Bean이라고 한다. 
  */
 public class HelloController {
+	
+	@Autowired
+	
+	StudentService stService;
+	
+	@RequestMapping(value="/student")
+	public String student(Model model) {
+		
+		StudentVO stVO = stService.findByStNum("30001");
+		model.addAllAttributes("STUDENT", stVO);
+		
+		return "student";
+		
+		
+		
+		
+	}
 
 }

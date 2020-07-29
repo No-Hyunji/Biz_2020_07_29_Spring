@@ -53,4 +53,16 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/korea", method = RequestMethod.GET)
+	public String home3(Model model) {
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", "Republic of Korea");
+		
+		return "home";
+	}
 }
