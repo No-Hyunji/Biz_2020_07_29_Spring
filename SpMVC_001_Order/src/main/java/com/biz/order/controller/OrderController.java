@@ -1,7 +1,9 @@
 package com.biz.order.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.biz.order.model.OrderVO;
 import com.biz.order.service.OrderService;
@@ -15,7 +17,12 @@ public class OrderController {
 	 * oService에 주입하라(Dependency Inject)
 	 * 결국 oService 객체를 통하여 method를 호출할 준비가 된다. 
 	 */
+	@Autowired
 	private OrderService oService;
+	
+	@RequestMapping(value="/order")
+	
+	
 	
 	public String getOrder(Model model) {
 		

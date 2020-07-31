@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+header {
+	background-color: rgb(218, 184, 121);
+	color: white;
+	padding: 2rem;
+	text-align: center;
+}
+
+nav {
+	background-color: rgb(178, 124, 228);
+}
+
+ul {
+	margin: 0;
+}
+
+li {
+	display: inline-block;
+	padding: 5px;
+	background-color: rgb(178, 124, 228);
+	color: white;
+	cursor: pointer;
+}
+
+li:hover {
+	background-color: teal;
+	color: white;
+}
+a {
+	color: white;
+	text-decoration: none;
+}
+
+footer {
+	
+	background-color:black;
+	text-align:center;
+	padding:1.1rem;
+	color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
