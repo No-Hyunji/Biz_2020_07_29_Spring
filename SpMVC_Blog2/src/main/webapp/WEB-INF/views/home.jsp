@@ -1,48 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<title>얼렁뚱땅 블로그</title>
-<link rel="stylesheet" type="text/css" href="static/css/main.css"/>
+<%@ include file="/WEB-INF/views/include/include-head.jspf"%>
 </head>
-
 <body>
-	<header>
-		<h3>얼렁뚱땅 블로그 V1</h3>
-		<p>나의 얼렁뚱땅 블로그에 방문해 주신것을 환영합니다!!!</p>
-	</header>
+	<%@ include file="/WEB-INF/views/include/include-header.jspf"%>
+
 	<section id="main">
 		<article id="button">
-			<button><a href="input">블로그 작성</a></button>
-		</article>
-
-		
+			<button>
+				<a href="${rootPath}/blog/input">블로그작성</a>
+			</button>
 		</article>
 		<article id="blog_body">
 			<section class="blog_title">
-				<h4>오늘은 블로그 시작하는 날</h4>
-
+				<h3>윤동주 - 서시(序詩)</h3>
 			</section>
-			<section id="blog_text">
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-					at eaque esse illum vero veritatis nesciunt debitis corrupti! Totam
-					fuga beatae quae dolore molestias tempore quod delectus illo
-					reiciendis eaque.</p>
+			<section class="blog_text">
+				<h5>죽는날까지 하늘을 우러러</h5>
+				<h5>한 점 부끄럼이 없기를</h5>
+				<h5>잎새에 이는 바람에도</h5>
+				<h5>나는 괴로워 했다</h5>
+				<h5>별을 노래하는 마음으로</h5>
+				<h5>모든 죽어가는 것을 사랑해야지</h5>
+				<h5>그리고 나에게 주어진 길을</h5>
+				<h5>걸어야 겠다</h5>
+				<h5>오늘 밤에도 별이 바람에 스치운다.</h5>
 
 			</section>
 		</article>
-
 	</section>
-	<footer>
-		<address>CopyRight &copy; kiekuy47@gmail.com</address>
-
-
-
-
-	</footer>
+	<%@ include file="/WEB-INF/views/include/include-footer.jspf"%>
 
 </body>
 </html>
