@@ -5,7 +5,9 @@
   
  <mapper namespace="com.biz.blog.dao.BlogDao">
  
- 	<select id="selectAll"></select>
+ 	<select id="selectAll" resultType="BlogVO">
+ 	SELECT * FROM tbl_blogs
+ 	ORDER BY bl_date DESC, bl_time DESC</select>
  	<select id="findById"></select>
  	<insert id="insert"></insert>
  	<update id="update"></update>
