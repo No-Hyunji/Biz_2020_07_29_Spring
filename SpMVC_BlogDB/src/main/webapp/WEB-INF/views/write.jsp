@@ -14,6 +14,9 @@
 <body>
 	<%@ include file="/WEB-INF/views/include/include-header.jspf" %>
 	<section id="main">
+		<form method="POST">
+			<input name="bl_seq" value="$BLOG.bl_seq
+		</form>
 		<form action="${rootPath}/blog/writer" method="POST">
 			<div>
 				<input name="bl_user" placeholder="사용자를 입력하세요" />

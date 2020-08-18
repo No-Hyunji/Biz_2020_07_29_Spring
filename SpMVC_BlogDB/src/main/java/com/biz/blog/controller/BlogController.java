@@ -25,7 +25,9 @@ public class BlogController {
 	@Autowired
 	private BlogService bService;
 	
-	
+	// http://localhost:8080/blog/blog/list주소로 req했을 때 응답할 함수
+	// method=RequestMethod.GET : req를 할 때 <a href=주소> 를 클릭했을 때 
+	// 응답하는 요청 method
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public String list(Model model) {
 		
@@ -87,5 +89,24 @@ public class BlogController {
 		return "redirect:/blog/list";
 	
 	}
-	
+	@RequestMapping(value="/view",method=RequestMethod.GET)
+	public String view(String seq, Model model) {
+		log.debug("SEQ : {}", seq);
+		/*
+		 * SQL Injection공격을 사전에 차단하기 위해 
+		 * Controller에서 SEQ값을 문자열형에서 Long형으로 변환하는 코드를 추가
+		 */
+		long long_seq = 0;
+		try {
+			long_seq = Long.valueOf(seq);
+		} catch (Exception e) {
+			model.addAttribute("ERROR" )
+			// TODO: handle exception
+		}
+		
+		BlogVO blogVO = bService.findBySeq(seq);
+		model.addAttribute("BLOG",blogVO);
+		return "view";
+		
+	}
 }

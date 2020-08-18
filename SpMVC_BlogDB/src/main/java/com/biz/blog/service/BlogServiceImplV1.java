@@ -1,5 +1,7 @@
 package com.biz.blog.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -33,11 +35,20 @@ public class BlogServiceImplV1 implements BlogService{
 		List<BlogVO> blogList = blogDao.selectAll();
 		return blogList;
 	}
-
+/*
 	@Override
 	public BlogVO findBySeq(long seq) {
+	
 		// TODO Auto-generated method stub
 		return null;
+	}*/
+	@Override
+	public BlogVO findBySeq(String seq) {
+	
+		// TODO Auto-generated method stub
+		BlogDao blogDao = sqlSession.getMapper(BlogDao.class);
+		BlogVO blogVO = blogDao.findBySeq(seq);
+		return blogVO;
 	}
 
 	@Override
@@ -45,11 +56,35 @@ public class BlogServiceImplV1 implements BlogService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	/*
+	 * INSERT문을 실행 할 때 많이 발생하는 Exception
+	 * java.sql.SQLException: 부적합한 열 유형: 1111
+	 * MyBatis를 사용하여 insert를 수행 할 때
+	 * NOT NULL이 아닌 칼럼에 값이 없으면 발생하는 Exception
+	 * 날짜와 시간 칼럼에 값이 없어서 발생하는 Exception
+	 */
 	@Override
 	public int insert(BlogVO blogVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		BlogDao blogDao = sqlSession.getMapper(BlogDao.class);
+		
+		// 작성한 날짜와 시각을 VO에 담기 위해 insert서비스에서
+		// 날짜 시각 형성
+		Date date = new Date(System.currentTimeMillis());
+		
+		// Date 데이터를 문자열형으로 변환하기 위해 
+		// 2020-08-18 형식의 문자열로 변환하기 위한 format선언
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		
+		// 09:32:00 형식의 문자열로 변환하기 위한 format 선언
+		SimpleDateFormat st = new SimpleDateFormat("hh:mm:dd");
+		
+		// 문자열형으로 날짜와 시각을 변환하여 VO에 담기
+		blogVO.setBl_date(sd.format(date));
+		blogVO.setBl_time(st.format(date));
+		
+		
+		int ret = blogDao.insert(blogVO);
+		return ret;
 	}
 
 	@Override

@@ -11,3 +11,5 @@ C:\bizwork\workspace\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearc
 \SpMVC_Blog2\src\main\java
 C:\bizwork\workspace\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1503323266.index
 \SpMVC_Blog2\src\main\java
+C:\bizwork\workspace\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3868090717.index
+\SpMVC_BlogDBV2\src\main\java
