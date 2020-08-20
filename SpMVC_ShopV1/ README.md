@@ -17,4 +17,8 @@
 * commons-dbcp2
 * ojdbc
 
-*spring.appServlet/mybatis-context.xml 파일 생성
+* spring.appServlet/mybatis-context.xml 파일 생성
+
+## URL(Uniform Resource Location), URI(Uniform Resource Indentifier)
+* URL : 파일 식별자
+* URI : 통합 자원 식별자
