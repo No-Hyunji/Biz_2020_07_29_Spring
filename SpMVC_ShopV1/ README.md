@@ -22,3 +22,20 @@
 ## URL(Uniform Resource Location), URI(Uniform Resource Indentifier)
 * URL : 파일 식별자
 * URI : 통합 자원 식별자
+
+### View단에서 사용하는 URL
+* <a href = "http://localhost:8080/shop/">서버 Home</a>
+tomcat WAS에게 shop이라는 Context를 가진 project가 작동되고 있느냐?라고 물어보는 request
+* <a href = "http://localhost:8080/shop/product/list">상품리스트</a>
+shop Context의 Dipatcher에게 product/list를 수행 할 수 있는 Controller method가 있느냐??라고 묻는 request
+* 이 html 코드를 화면에서 만나면 Hyper Text(anchor 문자열)를 클릭했을 때 서버에 request한다
+이 때 수행하는 request는 method=RequestMethod.GET 설정된 함수에서 처리한다.
+
+* href : Hyper Text Reference, URL 주소라고 생각하면 됨.
+
+### HTML 코드에서 GET method로 Request를 요청하는 곳들
+* anchor tag : <a href="주소">텍스트</a>
+* css 가져오기 : <link rel="stylesheet" href="주소"/>
+* script 가져오기 : <script src="주소"></script>
+* 이미지 가져오기 : <img src="주소"/>
+* 배경이미지 : background-image : url("주소")
