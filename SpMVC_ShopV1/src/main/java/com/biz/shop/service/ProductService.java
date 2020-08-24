@@ -10,7 +10,7 @@ import com.biz.shop.model.ProductVO;
  * 이 인터페이스를 implements한 클래스는 인터페이스의 영향을 받아
  * 메서드를 구현하게 된다.
  */
-public interface ProductService extends GenericService<ProductVO, String>{
+public interface ProductService extends GenericService<ProductVO,String>{
 	
 	// Generic에는 없지만 Product를 구현하는데 필요한 메서드가 있으면
 	// 그 메서드는 별도로 선언해준다.

@@ -2,19 +2,26 @@ package com.biz.shop.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.biz.shop.model.ProductVO;
+import com.biz.shop.persistence.ProductDao;
 import com.biz.shop.service.ProductService;
 
+import lombok.extern.slf4j.Slf4j;
 
-@Service(value="/proServiceV1")
+@Slf4j
+@Service(value="proServiceV1")
 public class ProductServiceImplV1 implements ProductService{
-
+	
+	@Autowired
+	private ProductDao proDao;
+	
 	@Override
 	public List<ProductVO> selectAll() {
 		
-		return null;
+		return proDao.selectAll();
 	}
 
 	@Override
@@ -24,13 +31,21 @@ public class ProductServiceImplV1 implements ProductService{
 	}
 
 	@Override
-	public int insert(ProductVO VO) {
+	public int insert(ProductVO vo) {
+		vo.setP_image("이미지 없음");
+		int ret = proDao.insert(vo);
 		
-		return 0;
+		if(ret > 0) {
+			log.debug("INSERT 성공 {} 개 데이터 추가", ret);
+		}else {
+			log.debug("INSERT 실패 {}", ret);
+		}
+	
+		return ret;
 	}
 
 	@Override
-	public int update(ProductVO VO) {
+	public int update(ProductVO vo) {
 		
 		return 0;
 	}
