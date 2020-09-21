@@ -140,4 +140,5 @@ typings/
 .metadata/
 RemoteSystemsTempFiles/
 
-# mySec File
+# naver API key
+NaverSecret.*
