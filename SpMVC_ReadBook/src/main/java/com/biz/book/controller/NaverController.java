@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.biz.book.model.BookVO;
 import com.biz.book.service.NaverService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping(value="/naver")
 public class NaverController {

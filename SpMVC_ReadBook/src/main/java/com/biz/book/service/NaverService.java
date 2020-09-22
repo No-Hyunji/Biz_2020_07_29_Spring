@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 import com.biz.book.config.NaverSecret;
 import com.biz.book.model.BookVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 /*
  * naver API 통하여 도서명을 보내고
  * 그 결과를 JSON형태로 수신하여 Parsing 처리를 수행하는 서비르 클래스 
@@ -30,6 +32,7 @@ import com.biz.book.model.BookVO;
  * 4. BookVO에 담고
  * 5. List<BookVO>에 담기 
  */
+@Slf4j
 @Service
 public class NaverService {
 
@@ -39,7 +42,7 @@ public class NaverService {
 		String queryURL = NaverSecret.NAVER_BOOK_JSON;
 		if(category.equalsIgnoreCase("NEWS")) {
 			queryURL = NaverSecret.NAVER_NEWS_JSON;
-		}else if(category.equalsIgnoreCase("MOVIE")){
+		} else if (category.equalsIgnoreCase("MOVIE")){
 			queryURL = NaverSecret.NAVER_MOVIE_JSON;
 		}
 		
@@ -99,12 +102,12 @@ public class NaverService {
 			// InputStreamReader와 BufferedReader를 파이프로 연결
 			buffer = new BufferedReader(is);
 
-			// StringBuffer sBuffer = new StringBuffer();
-			String sBuffer = "";
+			StringBuffer sBuffer = new StringBuffer();
+			// String sBuffer = "";
 			String reader = new String();
 			while ((reader = buffer.readLine()) != null) {
-				// sBuffer.append(reader);
-				sBuffer += reader;
+				sBuffer.append(reader);
+				// sBuffer += reader;
 			}
 			/*
 			 * while(true) { reader = buffer.readLine(); if(reader == null) break;
@@ -129,11 +132,11 @@ public class NaverService {
 		
 		List<BookVO> bookList = new ArrayList<BookVO>();
 		JSONParser jParser = new JSONParser();
-		// JSONParser도구를 사용하여 JSON형태의 문자열을
-		// JSONObject(객체)로 변환하기
-		JSONObject jObject;
+		// JSONObject jObject;
 		try {
-			jObject = (JSONObject) jParser.parse(jsonString);
+			// JSONParser도구를 사용하여 JSON형태의 문자열을
+			// JSONObject(객체)로 변환하기
+			JSONObject jObject = (JSONObject) jParser.parse(jsonString);
 			JSONArray jArray = (JSONArray) jObject.get("items");
 			
 			int size = jArray.size();
@@ -151,14 +154,25 @@ public class NaverService {
 				 * VO객체를 생성 할 때 Builder패턴을 사용할 수 있다.
 				 * GoF 패턴중 생성자 패턴 중 1가지
 				 */
-				
+				String descript = "";
+				if(jo.get("director") != null) {
+					descript += String.format("감독: %s <br>", jo.get("director").toString());
+				}
+				if(jo.get("actor") != null) {
+					descript += String.format("출연: %s <br>", jo.get("actor").toString());
+				}
+				if(jo.get("userRating") != null) {
+					descript += String.format("평점: %s <br>", jo.get("userRating").toString());
+				}
 				BookVO bookVO = BookVO.builder()
 						.title(jo.get("title").toString())
 						.image(jo.get("image") == null 
 								? "noImage"
 								: jo.get("image").toString())
 						.link(jo.get("link").toString())
-						.description(jo.get("description").toString())
+						.description(jo.get("description") == null
+								? descript
+								: jo.get("description").toString())
 						.build();
 				bookList.add(bookVO);
 			}

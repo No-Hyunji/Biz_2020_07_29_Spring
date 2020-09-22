@@ -84,7 +84,7 @@
 			<img src="${rootPath}/resources/images/noImage.png" width="50px">
 			</c:if>
 			<c:if test="${naver.image != 'noImage'}"></c:if>
-			<img src="" alt="네이버 이미지">
+			<img src="${naver.image}" alt="네이버 이미지">
 			</a>
 			<p>${naver.description}</p>
 		</div>
