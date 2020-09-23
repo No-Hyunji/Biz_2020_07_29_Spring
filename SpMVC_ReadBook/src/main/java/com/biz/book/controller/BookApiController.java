@@ -27,6 +27,14 @@ public class BookApiController {
 	@Qualifier(value ="naverServiceV2")
 	private NaverService<BookVO> nService;
 	
+	/*
+	 * produces
+	 * 클라이언트에게 데이터를 보내는 방식을 지정하는 속성
+	 * 기본값이 application/json형태인데 만약
+	 * 클라이언트에서 json데이터를 제대로 수신하지 못하면
+	 * 강제로 값을 지정해 주자 
+	 */
+	
 	@RequestMapping(value="/isbn",method=RequestMethod.POST,produces = "application/json;charset=utf8")
 	public BookVO naverSearch(String search_text){
 		
