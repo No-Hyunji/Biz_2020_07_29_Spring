@@ -28,7 +28,7 @@ public class Book_JSON_Parent {
 	public String display;       // integer	검색된 검색 결과의 개수이다.
 	
 	// 가장 중요한 변수 객체
-	@XmlElement(name="items")
+	@XmlElement(name="channel")
 	public List<BookVO> items;
 
 }

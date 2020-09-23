@@ -91,6 +91,6 @@ public class NaverServiceImplV2_XML extends NaverServiceImplV1 {
 		HttpEntity<String> entity = new HttpEntity<String>("parameter",headers);
 		ResponseEntity<Book_XML_Parent> bookList = null;
 		bookList = restTemp.exchange(restURI, HttpMethod.GET,entity,Book_XML_Parent.class);
-		return bookList.getBody().channel.items;
+		return bookList.getBody().channel.item;
 	}
 }

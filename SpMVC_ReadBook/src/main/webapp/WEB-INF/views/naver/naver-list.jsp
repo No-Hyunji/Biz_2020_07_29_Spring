@@ -87,6 +87,7 @@
 			<img src="${naver.image}" alt="네이버 이미지">
 			</a>
 			<p>${naver.description}</p>
+			<p>ISBN : ${naver.isbn}</p>
 		</div>
 	</c:forEach>
 	
