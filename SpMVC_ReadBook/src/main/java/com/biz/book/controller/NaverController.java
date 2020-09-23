@@ -58,7 +58,7 @@ public class NaverController {
 		
 		List<BookVO> bookList = nServiceV2.getNaverList(queryURL);
 		model.addAttribute("NAVERS",bookList);
-		return "naver/naver-list";
+		return "naver/naver-search-list";
 		
 	}
 	

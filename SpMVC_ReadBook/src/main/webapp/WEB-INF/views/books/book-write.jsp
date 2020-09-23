@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>나의 홈페이지</title>
+
 </head>
 <body>
 <style>
@@ -72,28 +73,66 @@
 	form#books button:hover{
 		box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
 	}
+	/*-------------------Modal 설정-------------------------- */
 	section#book-modal {
-		display:none;
-		align-items:center;
-		justify-content:center;
-		
 		position:fixed;
 		top:0;
 		left:0;
 		width:100%;
 		height:100%;
+		/*
+		!important
+		색상을 지정했을 때 
+		다른 CSS하고 충돌하여 색상지정이 원하는대로 
+		안돼는 경우가 있다.
+		이 때 !important를 지정하면
+		앞에서 지정한 색상을 무시하고 지금 지정한 값으로 
+		강제 지정하라
+		*/
 		background-color:rgba(0,0,0,0.4);
 	}
-	section#book-modal div{
-		padding:10px;
+	article#modal-body{
+		position:absolute;
+		top:50%;
+		/* 중앙정렬 됨 ㄱㄱ */
+		left:70%;
+		width:70%;
+		height:50%;
+		transform:translate(-50%, -50%);
+		display:flex;
+		flex-flow:column nowrap;
+	}
+	div#modal-header{
+		flex:1;
 		width:60%;
-		height:70%;
+		text-align:right;
+		background-color:rgba(100,100,100,1);
+	}
+	div#modal-header span{
+		font-size:30px;
+		font-weight:500;
+		color:white;
+		cursor:pointer;
+		margin:15px;
+	}
+	div#modal-header span:hover{
+		color:red;
+	}
+	div#search-result{
+		flex:7;
+		width:60%;
+		padding:30px;
+		overflow:auto;
+		
 		background-color:rgba(255,255,255,1);
 		border:1px solid rgba(0,0,255,1);
-		overflow:auto;
+		
+		box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+		border-bottom-left-radius:15px;
+		border-bottom-right-radius:15px;
 	}
 </style>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function(){
 		$("#naver-search").click(function(){
@@ -114,19 +153,85 @@
 				// return하면 그 결과를
 				// #search-result div box에 채워서 보여달라
 				success : function(result){
-					$("#search-result").html(result)
+					 $("#search-result").html(result)
 				},
 				error : function(error){
 					alert("서버 통신 오류!!")
 				}
 			})
 			
-			$("#book-modal").css("display","flex")
+			$("#book-modal").css("display","block")
 		})
-		$("#book-modal").click(function(){
+		
+		// x 표시를 클릭했을 때 modal 창 닫기 
+		$("div#modal-header span").click(function(){
 			$("#book-modal").css("display","none")
 		})
-	})
+		
+		/*
+		동적으로 구현된 HTML에 event 핸들링 설정하기
+		현재 document(HTML문서)가 생성되는 동안이 없던 tag를 
+		JS(JQ)코드에서 동적으로 생성했을 경우 화면에 그려지는 것은
+		아무런 문제가 없으나
+		
+		JS에서 event핸들러를 설정할 때 아직 화면에 없는 tag에 연결을 하면 
+		무시해 버리고 없던 일로 만들어 버린다.
+		
+		사후에(HTML문서가 완성된 후 ) JS코드로 생성할 tag(id, class)에 
+		event를 설정을 하려면 자체에 설정하지 않고 
+		가장 상위 객체인 document에 on 함수를 사용하여 이벤트를 설정한다.
+		$(document).on("event","대상",function(){ })
+		
+		주의사항 
+		$(selector).click(function(){})
+		만약 기존에 selector가 click event가 설정되어 있으면
+		기존의 이벤트를 덮어쓰기 한다. 
+		
+		$(document).on("event","selector")
+		만약 기존에 selector에 대한 click event가 설정되어 있더라도 중복정의 된다. 
+		
+		동적으로 여는곳에선s $(document).on()를 사용하여 event핸들러를 설정하고
+		동적으로 열리는 곳에서는 절대 $(document).on()사용하면 안된다.
+		동적으로 열리는 곳에서는 $(selector).click()를 사용하자 
+		*/
+		$(document).on("click","div.book-select",function(){
+			let isbn = $(this).data("isbn")
+			// 13자리 isbn 추출
+			// 코드의 오른쪽에서 13자리를 잘라내라 
+			let length = isbn.length
+			isbn = isbn.substring(length -13)
+			alert(isbn)
+			$.ajax({
+				url : "${rootPath}/api/isbn",
+				method : "POST",
+				data : {"search_text" : isbn}
+			})
+			.done(function(bookVO){
+				//alert(JSON.stringify(bookVO))
+				$("#seq").val(bookVO.seq);	
+				$("#title").val(bookVO.title);	
+				$("#link").val(bookVO.link);
+				$("#image").val(bookVO.image);
+				$("#author").val(bookVO.author);
+				$("#price").val(bookVO.price);
+				$("#discount").val(bookVO.discount);
+				$("#publisher").val(bookVO.publisher);
+				$("#isbn").val(bookVO.isbn);
+				$("#description").val(bookVO.description);
+				$("#pubdate").val(bookVO.pubdate);
+				$("#buydate").val(bookVO.buydate);
+				$("#buyprice").val(bookVO.buyprice);	
+				$("#buystore").val(bookVO.buystore);	
+				$("#section#book-modal").css("display","none");
+			})
+			.fail(function(xhr,textStatus,error){
+				alert("서버와 통신오류!!")
+			})
+		})
+		
+		$("section#book-modal").css("display","none")
+		})
+		
 </script>
 <h3>도서정보 등록</h3>
 <form method="POST" id="books">
@@ -155,7 +260,12 @@
 </form>
 
 <section id="book-modal">
-	<div id="search-result"></div>
+	<article id="modal-body">
+		<div id="modal-header">
+			<span>&times;</span>
+		</div>
+		<div id="search-result"></div>
+	</article>
 </section>
 
 </body>
