@@ -1,13 +1,15 @@
 package com.biz.book.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.biz.book.mapper.BookDao;
 import com.biz.book.model.BookVO;
 import com.biz.book.service.NaverService;
 
@@ -26,6 +28,9 @@ public class BookApiController {
 	@Autowired
 	@Qualifier(value ="naverServiceV2")
 	private NaverService<BookVO> nService;
+	
+	@Autowired
+	private BookDao bookDao;
 	
 	/*
 	 * produces
@@ -57,6 +62,16 @@ public class BookApiController {
 		return bookVO;
 		
 	}
-	
-	
+	@ResponseBody
+	@RequestMapping(value="/detail/{book_seq}",method=RequestMethod.GET,
+			produces = "application/json;charset=utf8")
+	public BookVO detail(
+			@PathVariable("book_seq") String id, Model model) {
+		
+		log.debug("PATH : {}",id);
+		long seq = Long.valueOf(id);
+		BookVO bookVO = bookDao.findById(seq);
+		// log.debug(bookVO.toString());
+		return bookVO;
+	}
 }

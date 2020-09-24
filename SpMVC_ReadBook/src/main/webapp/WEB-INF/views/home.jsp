@@ -43,6 +43,9 @@
     	<c:when test="${BODY == 'BOOK-WRITE'}">
     		<%@ include file="/WEB-INF/views/books/book-write.jsp" %>
     	</c:when>
+    	<c:when>
+    		
+    	</c:when>
     </c:choose>
     BODY
     </section>
