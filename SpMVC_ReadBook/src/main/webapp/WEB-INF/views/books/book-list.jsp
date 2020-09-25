@@ -9,7 +9,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>나의 홈페이지</title>
 <link href="${rootPath}/static/css/book-list.css?ver=2020-09-24-096" rel="stylesheet">
-<script src="${rootPath}/static/js/book-list.js?ver=2020-19-24-087"></script>
+<script src="${rootPath}/static/js/book-list.js?ver=2020-19-24"></script>
 </head>
 <body>
 <table id="book-list">
@@ -46,7 +46,7 @@
 	</c:choose>
 </table>
 <div id="book-link-box">
-<a href="${rootPath}/books/input">새로작성</a>
+	<a href="${rootPath}/books/input">새로작성</a>
 </div>
 </body>
 </html>

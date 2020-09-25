@@ -45,7 +45,7 @@ public class BooksController {
 		BookVO bookVO = BookVO.builder().buydate(todayString).build();
 		
 		model.addAttribute("BODY","BOOK-WRITE");
-		model.addAttribute("bookVO",new BookVO());
+		model.addAttribute("bookVO",bookVO);
 		return "home";
 		
 
@@ -85,8 +85,8 @@ public class BooksController {
 		long seq = Long.valueOf(id);
 		BookVO bookVO = bookDao.findById(seq);
 		
-		model.addAttribute("BODY","BOOK-DETAIL");
 		model.addAttribute("BOOKVO",bookVO);
+		model.addAttribute("BODY","BOOK-DETAIL");
 		return "home";
 	}
 }

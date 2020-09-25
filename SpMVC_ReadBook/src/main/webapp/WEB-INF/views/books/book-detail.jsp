@@ -2,26 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<title>나의 홈페이지</title>
-</head>
-<body>
 <style>
 	table#book-detail{
-		width:70%;
+		width:60%;
 		margin:20px auto;
 	}
-	table#book-detail .title{
-		padding:1rem;
-		background-color:#ddd;
-		border-bottom:1px solid blue;
-	}
 	table#book-detail .title td{
-		padding:0.5rem;
+		padding:0.5rem 1rem;
+		background-color:#ddd;
+		border-bottom:1px solid gray;
 	}
 	table#book-detail .info td:first-child{
 		display:flex;
@@ -47,13 +36,15 @@
 		color:white;
 		background-color:green;
 	}
+	table#book-detail .desc td{
+		padding:15px;
+	}
 	table#book-detail .link th,
 	table#book-detail .link td{
 		background-color: #ccc;
 		padding:10px;
 	}
 </style>
-<h3>나의 홈페이지 방문을 환영합니다</h3>
 <table id="book-detail">
 	<tr class="title"><td colspan="2"><h3>${BOOKVO.title}</h3></td></tr>
 	<tr class="info">
@@ -62,8 +53,7 @@
 			<table>
 				<tr class="author"><th>저자</th><td>${BOOKVO.author}</td><td>${BOOKVO.pubdate}</td></tr>		
 				<tr class="price"><th>정가가격</th><td>${BOOKVO.price}</td><td>${BOOKVO.discount}</td></tr>
-				<tr class="pub"><th>출판사</th><td>${BOOKVO.publisher}</td></tr>
-				<tr><th>ISBN</th><td>${BOOKVO.isbn}</td></tr>
+				<tr class="pub"><th>출판사</th><td>${BOOKVO.publisher}</td><td>${BOOKVO.isbn}</td></tr>
 			</table>
 		</td>
 	</tr>
@@ -83,5 +73,3 @@
 		</th>
 	</tr>
 </table>
-</body>
-</html>

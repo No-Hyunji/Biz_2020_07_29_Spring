@@ -8,16 +8,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Read Book 2020</title>
-    <link href="${rootPath}/static/css/index.css?ver=2020-09-24" rel="stylesheet" />
+    <link href="${rootPath}/static/css/index.css?ver=2020-09-25-001" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script>
     // js 파일에서 el tag의 ${rootPath} 값을 참조하기 위해서
     // rootPath 변수를 전역으로 선언해 둔다. 
     	var rootPath = "${rootPath}"
     </script>
-    <script src="${rootPath}/static/js/main-nav.js?ver=2020-09-24"></script>
-   
+    <script src="${rootPath}/static/js/main-nav.js?ver=2020-09-25-001"></script>
   </head>
+  
   <body>
     <header>
       <h1>Read Book 2020</h1>
@@ -25,14 +25,14 @@
     </header>
     <nav id="main-nav">
       <ul>
-        <li>Read Book</li>
-        <li>도서정보</li>
-        <li>독서록</li>
+        <li id="menu-home">Read Book</li>
+        <li id="menu-books">도서정보</li>
+        <li id="menu-read-book">독서록</li>
         <li>네이버 검색</li>
-        <li>회원가입</li>
-        <li>로그인</li>
-        <li>마이페이지</li>
-        <li>로그아웃</li>
+        <li id="menu-join">회원가입</li>
+        <li id="menu-login">로그인</li>
+        <li id="menu-mypage">마이페이지</li>
+        <li id="menu-logout">로그아웃</li>
       </ul>
     </nav>
     <section id="main-section">
@@ -43,11 +43,13 @@
     	<c:when test="${BODY == 'BOOK-WRITE'}">
     		<%@ include file="/WEB-INF/views/books/book-write.jsp" %>
     	</c:when>
-    	<c:when>
-    		
+    	<c:when test="${BODY == 'BOOK-DETAIL'}">
+    		<%@ include file="/WEB-INF/views/books/book-detail.jsp" %>
     	</c:when>
+    		<c:otherwise>
+				    <%@ include file="/WEB-INF/views/main-body.jsp" %>
+    		</c:otherwise>    		
     </c:choose>
-    BODY
     </section>
     <footer>
       <address>CopyRight &copy; kiekuy47@gmail.com</address>
