@@ -3,6 +3,7 @@ package com.biz.book.service.auth;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.biz.book.mapper.AuthorityDao;
 import com.biz.book.mapper.UserDao;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
  * 회사의 실정, 업무환경, 여러가지 여건들을 요구분석하여
  * 솔루션을 사용하는 회사에 최적화 하는 것.
  */
+@Service("userDetailServiceV1")
 @RequiredArgsConstructor
 public class UserDetailServiceImplV1 implements UserDetailsService{
 	
@@ -37,9 +39,9 @@ public class UserDetailServiceImplV1 implements UserDetailsService{
 	 *  lombok의 @RequiredArgsConstructor를 사용하면 
 	 *  final로 선언된 모든 필드변수들을 모아서 생성자로 만들어준다. 
 	 */
-	private final UserDao userDao;
+	/*private final UserDao userDao;
 	private final AuthorityDao authDao;
-	
+	*/
 	
 
 	/*
@@ -51,7 +53,14 @@ public class UserDetailServiceImplV1 implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		UserDetailsVO userDetail = userDao.findById(username);
+		//UserDetailsVO userDetail = userDao.findById(username);
+		
+		// 테스트를 위한 임시 사용자 정보 생성
+		UserDetailsVO userDetail = UserDetailsVO.builder()
+					.username(username)
+					.password("12341234")
+					.isEnabled(true)
+					.build();
 		if(userDetail == null) {
 			throw new UsernameNotFoundException(username + "정보를 찾을 수 없음");
 		}
