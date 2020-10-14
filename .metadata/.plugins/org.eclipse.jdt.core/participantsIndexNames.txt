@@ -25,6 +25,8 @@ C:\bizwork\workspace\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearc
 \SpMVC_ReadBook\src\main\java
 C:\bizwork\workspace\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1886045614.index
 \SpMVC_ReadBookV2\src\main\java
+C:\bizwork\workspace\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1910330137.index
+\SpMVC_Security\src\main\java
 C:\bizwork\workspace\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2078603765.index
 \SpMVC_ShopV1\src\main\java
 C:\bizwork\workspace\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1545839500.index
