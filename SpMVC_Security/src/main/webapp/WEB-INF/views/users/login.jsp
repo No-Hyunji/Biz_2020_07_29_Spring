@@ -50,6 +50,7 @@
 	
 	<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
 	<h4 id="login-fail">${SPRING_SECURITY_LAST_EXCEPTION.message}</h4>
+	<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
 	</c:if>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	<input id="username" name="username" placeholder="USER ID">
