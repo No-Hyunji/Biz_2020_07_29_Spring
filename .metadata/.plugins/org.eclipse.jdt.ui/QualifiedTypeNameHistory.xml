@@ -52,4 +52,5 @@
 <fullyQualifiedTypeName name="org.springframework.security.core.authority.SimpleGrantedAuthority"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="lombok.Builder"/>
+<fullyQualifiedTypeName name="com.biz.book.model.UserDetailsVO"/>
 </qualifiedTypeNameHistroy>
