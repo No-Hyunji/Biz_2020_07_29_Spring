@@ -8,4 +8,8 @@ public interface BBsService {
 
 	public List<BBsVO> selectAll();
 
+	public void insert(BBsVO bbsVO);
+
+	
+	
 }

@@ -13,13 +13,25 @@
 		<property name="username" value="user1"/>
 		<property name="password" value="user1"/>
 	</bean>
-	
+
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="oracle_ds"/>
 		<property name="typeAliasesPackage" value="com.biz.bbs.model"/>
+		<property name="configuration">
+			<bean class="org.apache.ibatis.session.Configuration">
+				<property name="jdbcTypeForNull" value="VARCHAR"/>
+			</bean>
+		</property>
 	</bean>
 	
-	<bean class="org.springframework.jdbc.datasource.DataSourceTrancsactionManager">
-		
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="oracle_ds"/>
 	</bean>
+	
+	<mybatis-spring:scan base-package="com.biz.bbs.mapper"/>
+	
+
+
+
+
 </beans>

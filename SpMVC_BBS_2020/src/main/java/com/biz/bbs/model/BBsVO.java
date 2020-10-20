@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BBsVO {
-	
+
 	private long b_seq;
 	private String b_date;
 	private String b_time;
@@ -22,5 +22,5 @@ public class BBsVO {
 	private int b_count;
 	private String b_file;
 
-
+	
 }

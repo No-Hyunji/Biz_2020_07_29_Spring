@@ -1,31 +1,58 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <script>
-	document.addEventListener("DOMContentLoaded",function(){
-		document.queryString("#bbs-write").addEventListener("click",function(){
-			document.location.href="${rootPath}/bbs/write"	
-		})
+	document.addEventListener("DOMContentLoaded", function() {
+		document.querySelector("#bbs-write").addEventListener("click",
+				function() {
+					document.location.href = "${rootPath}/bbs/write"
+				})
+				
+				    document.querySelector("table").addEventListener("click", function (event) {
+				      let tag_name = event.target.tagName;
+				      
+				      if (tag_name === "TD") {
+				        let seq = event.target.dataset.seq;
+				        if(seq){
+				        alert(seq);
+				        	
+				        }
+				      }
+				    });
+				  });
+		
 	})
 </script>
-
-<table>
-	<tr>
-		<th>NO</th>
-		<th>작성일자</th>
-		<th>작성시각</th>
-		<th>작성자</th>
-		<th>제목</th>
-		<th>조회수</th>
-	</tr>
-	<tr>
-		<td>NO</td>
-		<td>작성일자</td>
-		<td>작성시각</td>
-		<td>작성자</td>
-		<td>제목</td>
-		<td>조회수</td>
-	</tr>
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>NO</th>
+			<th>작성일자</th>
+			<th>작성시각</th>
+			<th>작성자</th>
+			<th>제목</th>
+			<th>조회수</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:if test="${empty BBS_LIST}">
+		  <tr><td colspan="6">데이터가 없습니다</td></tr>
+		</c:if>
+		<c:forEach items="${BBS_LIST}" var="vo" varStatus="i">
+		<tr class="bbs-tr" data-seq="">
+			<td>${i.count}</td>
+			<td>${vo.b_date}</td>
+			<td>${vo.b_time}</td>
+			<td>${vo.b_writer}</td>
+			<td data-seq="${vo.b_seq}">
+				${vo.b_subject}
+				<img src="${rootPath}/upload/${vo.b_file}" width="50px">
+			</td>
+			<td>${vo.b_count}</td>
+		</tr>
+		</c:forEach>
+	</tbody>
 </table>
 <button id="bbs-write">글쓰기</button>
+
+
