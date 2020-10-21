@@ -3,5 +3,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />        
 <footer>
-	<address>CopyRight &copy; kiekuy47@gmail.com</address>
+	<address>CopyRight &copy; callor@callor.com</address>
 </footer>

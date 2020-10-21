@@ -113,8 +113,10 @@
 					name="b_content"></textarea>
 		</div>
 		<div>
-			<label>이미지</label><input type="file" name="file" accept="image/*">
+			<label>이미지</label>
+			<input type="file" name="file" accept="image/*">
 		</div>
+
 		<div class="button-box">
 			<button type="button" id="list">리스트</button>
 			<button type="submit" id="save">저장</button>
