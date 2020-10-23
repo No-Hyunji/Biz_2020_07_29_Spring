@@ -15,12 +15,16 @@ import com.biz.bbs.model.BBsVO;
 public class BBsServiceImplV1 implements BBsService{
 	
 	@Autowired
-	private BBsDao bbsDao;
+	protected BBsDao bbsDao;
+	
+	
 	
 	@Autowired
-	@Qualifier("fileServiceV4")
-	private FileService fileService;
+	@Qualifier("fileServiceV5")
+	protected FileService fileService;
 
+	
+	
 	@Override
 	public List<BBsVO> selectAll() {
 		return bbsDao.selectAll();
@@ -47,7 +51,7 @@ public class BBsServiceImplV1 implements BBsService{
 		 * 첨부파일이 있는 게시판의 데이터를 삭제 할 때는
 		 * 1. seq에 해당하는 VO를 dao에서 findBySeq()하고
 		 * 2. 파일이름을 fileDelete()에 보내서 파일을 먼저 삭제
-		 * 3. 게시판 데이터를 삭제
+		 * 3. 게시판 데이터를 삭제 
 		 */
 		BBsVO bbsVO = bbsDao.findBySeq(long_seq);
 		String b_file = bbsVO.getB_file();
